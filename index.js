@@ -12,12 +12,13 @@ Deno.stdin.readable
 		new WritableStream({
 			write(entry) {
 				for (const path of getPaths(entry)) {
-					if (paths.has(path)) {
+					const concatenated = path.join('.')
+					if (paths.has(concatenated)) {
 						continue
 					}
 
-					paths.add(path)
-					console.log(path.join('.'))
+					paths.add(concatenated)
+					console.log(concatenated)
 				}
 			},
 		}),
